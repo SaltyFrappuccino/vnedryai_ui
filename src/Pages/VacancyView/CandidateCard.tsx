@@ -77,14 +77,14 @@ function CandidateCard(props: any) {
                     <Box>
                         <Stack direction="row" spacing={1}>
                             {(props.resumeMatching >= 0)?
-                                <WithPopOver text={props.resumeMatching + "% соотвествия резюме вакансии" }>
+                                <WithPopOver text={props.resumeMatching + "% соответствия резюме вакансии" }>
                                     <Button sx={{padding: "0", margin: "0", display: "flex", maxWidth: "20px", minWidth: "30px"}}>
                                         <Typography sx={{fontFamily: "SB sans Text"}} component="div"><Box sx={{color: getpAcorrdanceColor()}}>{props.resumeMatching}%</Box></Typography>
                                     </Button>
                                 </WithPopOver> : ""
                             }
                             {(props.teamProfileMatch >= 0)?
-                                <WithPopOver text={props.teamProfileMatch + "% соотвествия профилю команды" }>
+                                <WithPopOver text={props.teamProfileMatch + "% соответствия профилю команды" }>
                                     <Button sx={{padding: "0", margin: "0", display: "flex", maxWidth: "20px", minWidth: "30px"}}>
                                         <ThumbUpOffAltIcon color={getpTeamAnalyseColor()}></ThumbUpOffAltIcon>
                                     </Button>
@@ -113,7 +113,7 @@ function CandidateCard(props: any) {
                             {/*    </WithPopOver>*/}
                             {/*}*/}
                             {props.noTelegram == 1 &&
-                                <WithPopOver text={"Не указан Telegram можно позвонить" }>
+                                <WithPopOver text={"Не указан Telegram, можно позвонить" }>
                                     <Button sx={{padding: "0", margin: "0", display: "flex", maxWidth: "20px", minWidth: "30px"}}>
                                         <TelegramIcon color={"error"} />
                                     </Button>
