@@ -37,15 +37,15 @@ export function CandidateViewPage() {
     const [amount, setAmount] = useState()
     const [vacancy, setVacancy] = useState()
     useEffect(() => {
-        // axios.get<Candidate[]>(`http://localhost:8000/candidates/?id=${loc.state?.candidate.id}`)
+        // axios.get<Candidate[]>(`https://gigachat-hr.onrender.com/candidates/?id=${loc.state?.candidate.id}`)
         //     .then( res=> setCand(res.data[0]))
-        axios.get<any>(`http://localhost:8000/candidates_by_vacancy/${loc.state?.candidate.id}`)
+        axios.get<any>(`https://gigachat-hr.onrender.com/candidates_by_vacancy/${loc.state?.candidate.id}`)
             .then(res => setCand(res.data.find(el=> {
                 return el.id == loc.state?.candidate.id
             })))
-        axios.get<any>(`http://localhost:8000/vacancies_by_candidate/${loc.state?.candidate.vacancyId}`)
+        axios.get<any>(`https://gigachat-hr.onrender.com/vacancies_by_candidate/${loc.state?.candidate.vacancyId}`)
             .then(res => setAmount(res.data.length))
-        axios.get<any>(`http://localhost:8000/vacancies_by_candidate/${loc.state?.candidate.vacancyId}`)
+        axios.get<any>(`https://gigachat-hr.onrender.com/vacancies_by_candidate/${loc.state?.candidate.vacancyId}`)
             .then(res => setVacancy(res.data.find(el=> {
                 return el.candidate_id == loc.state?.candidate.id
             })))

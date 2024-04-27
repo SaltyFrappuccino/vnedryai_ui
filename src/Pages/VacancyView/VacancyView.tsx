@@ -38,9 +38,9 @@ function VacancyView() {
     const [can, setCan] = useState<ICandidate[]>()
     console.log(vacancy)
     useEffect(() => {
-        axios.get<any>(`http://localhost:8000/candidates_by_vacancy/${location.state}`)
+        axios.get<any>(`https://gigachat-hr.onrender.com/candidates_by_vacancy/${location.state}`)
             .then(res => setCan(res.data))
-        axios.get<any>(`http://localhost:8000/vacancies/?id=${location.state}`)
+        axios.get<any>(`https://gigachat-hr.onrender.com/vacancies/?id=${location.state}`)
             .then(res => setVacancy(res.data[0]))
     }, []);
 
