@@ -27,30 +27,28 @@ function CandidateCard(props: any) {
     const nav = useNavigate()
 
     const getpTeamAnalyseColor = ()=>{
-        if((typeof props.teamAnalys != "undefined")) {
-            if(props.teamAnalys < 10) return "error"
-            if(props.teamAnalys < 80) return "warning"
+        console.log(props.teamProfileMatch)
+            if(props.teamProfileMatch < 10) return "error"
+            if(props.teamProfileMatch < 80) return "warning"
             return "success"
-        }
     }
 
     const getpAcorrdanceColor = ()=>{
-
-        if((typeof props.teamAnalys != "undefined")) {
-            if(props.accordance < 10) return "error.main"
-            if(props.accordance < 80) return "warning.main"
+        console.log(props.resumeMatching)
+            if(props.resumeMatching < 10) return "error.main"
+            if(props.resumeMatching < 80) return "warning.main"
             return "success.main"
-        }
     }
     const onCandidateView = (e: React.MouseEvent<HTMLDivElement, MouseEvent>)=>{
             nav("/candidateview", {state: {
                     candidate: {
                         id: props.id,
-                        vacancyId: props.candidate_id,
+                        vacancyId: props.vacancyId,
+                        candidate_id: props.candidate_id,
                         photo: photo,
                         fio: props.fio,
-                        accordance: props.accordance,
-                        teamAnalys: props.teamAnalys,
+                        accordance: props.resumeMatching,
+                        teamAnalys: props.teamProfileMatch,
                     }
                 }})
     }
@@ -78,19 +76,19 @@ function CandidateCard(props: any) {
                     {/*</AvatarGroup>*/}
                     <Box>
                         <Stack direction="row" spacing={1}>
-                            {(typeof props.resumeMatching >= 0) &&
-                                <WithPopOver text={props.teamProfileMatch + "% соотвествия резюме вакансии" }>
+                            {(props.resumeMatching >= 0)?
+                                <WithPopOver text={props.resumeMatching + "% соотвествия резюме вакансии" }>
                                     <Button sx={{padding: "0", margin: "0", display: "flex", maxWidth: "20px", minWidth: "30px"}}>
-                                        <Typography sx={{fontFamily: "SB sans Text"}} component="div"><Box sx={{color: getpAcorrdanceColor()}}>{props.accordance}%</Box></Typography>
+                                        <Typography sx={{fontFamily: "SB sans Text"}} component="div"><Box sx={{color: getpAcorrdanceColor()}}>{props.resumeMatching}%</Box></Typography>
                                     </Button>
-                                </WithPopOver>
+                                </WithPopOver> : ""
                             }
-                            {(typeof props.teamProfileMatch >= 0) &&
-                                <WithPopOver text={props.teamAnalys + "% соотвествия профилю команды" }>
+                            {(props.teamProfileMatch >= 0)?
+                                <WithPopOver text={props.teamProfileMatch + "% соотвествия профилю команды" }>
                                     <Button sx={{padding: "0", margin: "0", display: "flex", maxWidth: "20px", minWidth: "30px"}}>
                                         <ThumbUpOffAltIcon color={getpTeamAnalyseColor()}></ThumbUpOffAltIcon>
                                     </Button>
-                                </WithPopOver>
+                                </WithPopOver> : ""
 
                             }
                             {props.recruiterSelection == 1 &&
@@ -115,7 +113,7 @@ function CandidateCard(props: any) {
                             {/*    </WithPopOver>*/}
                             {/*}*/}
                             {props.noTelegram == 1 &&
-                                <WithPopOver text={"Не указан Telegram можно позвониь" }>
+                                <WithPopOver text={"Не указан Telegram можно позвонить" }>
                                     <Button sx={{padding: "0", margin: "0", display: "flex", maxWidth: "20px", minWidth: "30px"}}>
                                         <TelegramIcon color={"error"} />
                                     </Button>

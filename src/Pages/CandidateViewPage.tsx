@@ -39,13 +39,13 @@ export function CandidateViewPage() {
     useEffect(() => {
         // axios.get<Candidate[]>(`http://localhost:8000/candidates/?id=${loc.state?.candidate.id}`)
         //     .then( res=> setCand(res.data[0]))
-        axios.get<any>(`http://localhost:8000/candidates_by_vacancy/${loc.state?.candidate.id}`)
+        axios.get<any>(`http://localhost:8000/candidates_by_vacancy/${ loc.state?.candidate.vacancyId }`)
             .then(res => setCand(res.data.find(el=> {
                 return el.id == loc.state?.candidate.id
             })))
-        axios.get<any>(`http://localhost:8000/vacancies_by_candidate/${loc.state?.candidate.vacancyId}`)
+        axios.get<any>(`http://localhost:8000/vacancies_by_candidate/${loc.state?.candidate.candidate_id}`)
             .then(res => setAmount(res.data.length))
-        axios.get<any>(`http://localhost:8000/vacancies_by_candidate/${loc.state?.candidate.vacancyId}`)
+        axios.get<any>(`http://localhost:8000/vacancies_by_candidate/${loc.state?.candidate.candidate_id}`)
             .then(res => setVacancy(res.data.find(el=> {
                 return el.candidate_id == loc.state?.candidate.id
             })))
@@ -58,13 +58,10 @@ export function CandidateViewPage() {
 
     };
 
-
     const getpTeamAnalyseColor = ()=>{
-        if((typeof cand.teamAnalys != "undefined")) {
-            if(cand.teamAnalys < 10) return "error"
-            if(cand.teamAnalys < 80) return "warning"
+            if(cand.teamProfileMatch < 10) return "error"
+            if(cand.teamProfileMatch < 80) return "warning"
             return "success"
-        }
     }
 
     const [age, setAge] = React.useState<string | number>('');
@@ -73,11 +70,9 @@ export function CandidateViewPage() {
 
     const getpAcorrdanceColor = ()=>{
 
-        if((typeof cand.teamAnalys != "undefined")) {
-            if(cand.accordance < 10) return "error.main"
-            if(cand.accordance < 80) return "warning.main"
+            if(cand.resumeMatching < 10) return "error.main"
+            if(cand.resumeMatching < 80) return "warning.main"
             return "success.main"
-        }
     }
 
 
@@ -116,19 +111,19 @@ export function CandidateViewPage() {
                     <Avatar size="lg" sx={{width: "150px", height: "150px"}} src={cand?.photo_url}></Avatar>
                 </Box>
                 <Typography sx={{fontFamily: "SB sans Text", margin: "0 0 0 20px"}}  level="title-lg">{cand?.fio}</Typography>
-                {(typeof cand?.accordance != "undefined") &&
-                    <WithPopOver text={cand?.accordance + "% соотвествия резюме вакансии" }>
+                {(cand?.resumeMatching >= 0) ?
+                    <WithPopOver text={cand?.resumeMatching + "% соотвествия резюме вакансии" }>
                         <MaterialB sx={{padding: "0", margin: "0 0 0 10px", display: "flex", maxWidth: "20px", minWidth: "30px"}}>
-                            <Typography sx={{fontFamily: "SB sans Text"}} component="div"><Box sx={{color: getpAcorrdanceColor()}}>{cand.accordance}%</Box></Typography>
+                            <Typography sx={{fontFamily: "SB sans Text"}} component="div"><Box sx={{color: getpAcorrdanceColor()}}>{cand.resumeMatching}%</Box></Typography>
                         </MaterialB>
-                    </WithPopOver>
+                    </WithPopOver> : ""
                 }
-                {(typeof cand?.teamAnalys != "undefined") &&
-                    <WithPopOver text={cand?.teamAnalys + "% соотвествия профилю команды" }>
+                {(cand?.teamProfileMatch >= 0) ?
+                    <WithPopOver text={cand?.teamProfileMatch + "% соотвествия профилю команды" }>
                         <MaterialB sx={{padding: "0", margin: "0 0 0 10px", display: "flex", maxWidth: "20px", minWidth: "30px"}}>
                             <ThumbUpOffAltIcon color={getpTeamAnalyseColor()}></ThumbUpOffAltIcon>
                         </MaterialB>
-                    </WithPopOver>
+                    </WithPopOver> : ""
                 }
             </Stack>
             <Typography sx={{fontFamily: "SB sans Text", marginTop: "30px"}} component="h5">Контакты</Typography>
