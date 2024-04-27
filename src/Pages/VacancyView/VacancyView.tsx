@@ -132,7 +132,7 @@ function VacancyView() {
                         boxShadow: 'lg',
                     }}
                 >
-                    <ModalClose variant="plain" sx={{ m: 1 }} />
+                    <ModalClose  variant="plain" sx={{ m: 1 }} />
                     <Typography
                         sx={{fontFamily: "SB sans Text", fontSize: "18px", fontWeight: "600"}}
                         id="modal-title"
@@ -144,6 +144,7 @@ function VacancyView() {
                         <MaterialButton disabled={countOfDates > 2} sx={{paddingLeft: "0"}} onClick={()=>{setCountOfDates(countOfDates + 1)}}>
                             <AddCircleOutlineIcon color={countOfDates > 2? "disabled": "info"} ></AddCircleOutlineIcon>
                         </MaterialButton>
+                        <Button onClick={handleClose}>Сохранить</Button>
                         <MaterialButton disabled={countOfDates <= 1}  sx={{paddingLeft: "0"}} onClick={()=>{setCountOfDates(countOfDates - 1)}}>
                             <RemoveCircleOutlineIcon color={countOfDates <= 1? "disabled": "info"} ></RemoveCircleOutlineIcon>
                         </MaterialButton>

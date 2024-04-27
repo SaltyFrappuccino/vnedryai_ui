@@ -123,7 +123,7 @@ function DescriptionCreate(props: Props) {
                                     <Button>Заполнить вручную</Button>
                                 <Button loading={isLoading} onClick={onVacancyCreate}>Сгенерировать {props.finalVacancy && "заново"}</Button>
                             </Stack>
-                            <MaterialButton sx={{paddingLeft: "0"}}>
+                            <MaterialButton sx={{paddingLeft: "0", width: "100px"}}>
                                 <Typography sx={{fontFamily: "SB sans Text", margin: "0 0 0 5px", fontSize: "10px"}} variant="caption" gutterBottom>
                                     Тесты <Typography sx={{fontFamily: "SB sans Text", fontSize: "12px"}} variant="caption" color="info"> 0 </Typography>
                                 </Typography>
